@@ -19,6 +19,9 @@ class CommentServiceProvider extends ServiceProvider
                     __DIR__ . '/../database/migrations/comments_table.stub.php' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_comments_table.php'),
                 ], 'migrations');
             }
+            $this->publishes([
+                __DIR__ . '/Factories/CommentFactory.php' => database_path('factories/CommentFactory.php')
+            ], 'factories');
         }
     }
 

@@ -9,13 +9,6 @@ return [
     'table_name' => 'comments',
 
     /**
-     * Model for Comment.
-     *
-     * By default, the model in this package is used.
-     */
-    'model' => \AchyutN\LaravelComment\Models\Comment::class,
-
-    /**
      * Model for Commenter.
      *
      * By default, the default Laravel User model is used.

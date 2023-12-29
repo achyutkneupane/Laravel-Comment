@@ -16,7 +16,7 @@ class CommentFactory extends Factory
      *
      * @var class-string<\Illuminate\Database\Eloquent\Model>
      */
-    protected $model = config('comment.model');
+    protected $model = Comment::class;
 
     /**
      * Define the model's default state.
@@ -27,7 +27,7 @@ class CommentFactory extends Factory
     {
         return [
             'commenter_type' => config('comment.commenter_model'),
-            'commenter_id' => (config('comment.commenter_model'))::random()->id,
+            'commenter_id' => (config('comment.commenter_model'))::all()->random()->id,
             'content' => $this->faker->text,
             'approved_at' => null,
         ];
