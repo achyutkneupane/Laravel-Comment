@@ -2,6 +2,7 @@
 
 namespace AchyutN\LaravelComment\Tests;
 
+use AchyutN\LaravelComment\Models\Comment;
 use AchyutN\LaravelComment\Tests\Models\User;
 use AchyutN\LaravelComment\Tests\Models\Article;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -41,7 +42,7 @@ class CommentTest extends BaseTestCase
     }
 
     /** @test */
-    public function test_user_can_comment_on_article()
+    public function test_article_can_have_comment_by_user()
     {
         $user = $this->createUser();
         $article = $this->createArticle();
@@ -54,5 +55,21 @@ class CommentTest extends BaseTestCase
 
         $this->assertCount(1, $article->comments);
         $this->assertEquals($comment->comment, $article->comments->first()->comment);
+    }
+
+    /** @test */
+    public function test_user_can_comment_on_article()
+    {
+        $user = $this->createUser();
+        $article = $this->createArticle();
+
+        $user->comments()->create([
+            'content' => $this->faker->paragraph,
+            'commentable_id' => $article->id,
+            'commentable_type' => get_class($article)
+        ]);
+
+        $this->assertCount(1, $article->comments);
+        $this->assertEquals($user->comments->first()->comment, $article->comments->first()->comment);
     }
 }
