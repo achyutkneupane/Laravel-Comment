@@ -1,0 +1,26 @@
+{
+    "name": "achyutn/laravel-comment",
+    "description": "Composer package to add comments in Laravel Models.",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Achyutn\\LaravelComment\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Achyut Neupane",
+            "email": "achyutkneupane@gmail.com",
+            "homepage": "https://achyut.com.np",
+            "role": "Maintainer"
+        }
+    ],
+    "minimum-stability": "stable",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Achyutn\\LaravelComment\\CommentServiceProvider"
+            ]
+        }
+    },
+}
