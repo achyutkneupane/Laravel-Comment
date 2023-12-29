@@ -13,6 +13,7 @@ class Comment extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
+    protected $table = config('comment.table_name');
     protected $casts = [
         'approved_at' => 'datetime',
     ];

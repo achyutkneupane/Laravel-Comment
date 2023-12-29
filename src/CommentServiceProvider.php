@@ -2,6 +2,7 @@
 
 namespace AchyutN\LaravelComment;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class CommentServiceProvider extends ServiceProvider
@@ -9,7 +10,7 @@ class CommentServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/config/comment.php' => config_path('comment.php'),
+            __DIR__ . '/../config/comment.php' => config_path('comment.php'),
         ], 'config');
 
         if (method_exists($this, 'publishes')) {
