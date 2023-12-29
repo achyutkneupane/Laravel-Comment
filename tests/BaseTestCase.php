@@ -3,6 +3,7 @@
 namespace AchyutN\LaravelComment\Tests;
 
 use AchyutN\LaravelComment\CommentServiceProvider;
+use AchyutN\LaravelComment\Tests\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\TestCase as Orchestra;
 
@@ -31,6 +32,7 @@ abstract class BaseTestCase extends Orchestra
             'prefix'   => '',
         ]);
         $app['config']->set('comment.table_name', 'comments');
+        $app['config']->set('comment.commenter_model', User::class);
     }
 
     public function getPackageProviders($app): array

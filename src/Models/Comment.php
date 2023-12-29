@@ -5,6 +5,7 @@ namespace AchyutN\LaravelComment\Models;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use AchyutN\LaravelComment\Factories\CommentFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
