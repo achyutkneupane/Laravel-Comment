@@ -18,8 +18,8 @@ return new class extends Migration
             $table->morphs('commentable');
             $table->morphs('commenter');
             $table->text('content');
-            $table->softDeletes();
             $table->timestamp('approved_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
