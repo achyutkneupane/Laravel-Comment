@@ -12,7 +12,7 @@ return [
      *
      * By default, the model in this package is used.
      */
-    'model' => \Achyutn\LaravelComment\Models\Comment::class,
+    'model' => \AchyutN\LaravelComment\Models\Comment::class,
 
     /**
      * Model for Commenter.
