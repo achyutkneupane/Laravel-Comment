@@ -2,9 +2,22 @@
     "name": "achyutn/laravel-comment",
     "description": "Composer package to add comments in Laravel Models.",
     "license": "MIT",
+    "homepage": "https://github.com/achyutkneupane/Laravel-Comment",
+    "require": {
+        "php": "^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0|^8.0|^9.0|^10.0",
+        "orchestra/testbench": "^8.19"
+    },
     "autoload": {
         "psr-4": {
             "AchyutN\\LaravelComment\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AchyutN\\LaravelComment\\Tests\\": "tests/"
         }
     },
     "authors": [
