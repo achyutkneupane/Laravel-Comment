@@ -5,10 +5,9 @@ namespace AchyutN\LaravelComment\Models;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use AchyutN\LaravelComment\Factories\CommentFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Comment extends Model
 {
@@ -35,14 +34,14 @@ class Comment extends Model
         return $this->morphTo();
     }
 
-    public function parent() : BelongsTo
+    public function parent() : MorphTo
     {
-        return $this->belongsTo(Comment::class, 'comment_id');
+        return $this->commentable();
     }
 
-    public function replies() : HasMany
+    public function replies() : MorphMany
     {
-        return $this->hasMany(Comment::class, 'comment_id');
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     public function approve()

@@ -123,4 +123,71 @@ class CommentTest extends BaseTestCase
         $comment->approve();
         $this->assertNotNull($comment->approved_at);
     }
+
+    /** @test */
+    public function test_reply_to_comment()
+    {
+        $user = $this->createUser();
+        $article = $this->createArticle();
+
+        $comment = $article->comments()->create([
+            'content' => $this->faker->paragraph,
+            'commenter_id' => $user->id,
+            'commenter_type' => get_class($user)
+        ]);
+
+        $reply = $comment->replies()->create([
+            'content' => $this->faker->paragraph,
+            'commenter_id' => $user->id,
+            'commenter_type' => get_class($user)
+        ]);
+
+        $this->assertCount(1, $article->comments);
+        $this->assertCount(1, $comment->replies);
+    }
+
+    /** @test */
+    public function test_parent_of_comment()
+    {
+        $user = $this->createUser();
+        $article = $this->createArticle();
+
+        $comment = $article->comments()->create([
+            'content' => $this->faker->paragraph,
+            'commenter_id' => $user->id,
+            'commenter_type' => get_class($user)
+        ]);
+
+        $reply = $comment->replies()->create([
+            'content' => $this->faker->paragraph,
+            'commenter_id' => $user->id,
+            'commenter_type' => get_class($user)
+        ]);
+
+        $this->assertEquals($article->id, $comment->parent->id);
+        $this->assertEquals($comment->id, $reply->parent->id);
+    }
+
+    /** @test */
+    public function test_multiple_replies_to_comment()
+    {
+        $user = $this->createUser();
+        $article = $this->createArticle();
+
+        $comment = $article->comments()->create([
+            'content' => $this->faker->paragraph,
+            'commenter_id' => $user->id,
+            'commenter_type' => get_class($user)
+        ]);
+
+        $comment->replies()->createMany(
+            Comment::factory()->count(5)->approved()->make()->toArray()
+        );
+
+        $this->assertCount(1, $article->comments);
+        $this->assertCount(5, $comment->replies);
+        foreach ($comment->replies as $reply) {
+            $this->assertEquals($comment->id, $reply->parent->id);
+        }
+    }
 }
