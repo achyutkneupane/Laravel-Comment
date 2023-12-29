@@ -17,9 +17,13 @@ class Comment extends Model
     protected $casts = [
         'approved_at' => 'datetime',
     ];
-    protected static function factory(): Factory
+    protected static function factory(int $count = 1): Factory
     {
-        return CommentFactory::new();
+        if($count && $count > 1) {
+            return CommentFactory::times($count);
+        } else {
+            return CommentFactory::new();
+        }
     }
     public function commentable() : MorphTo
     {
