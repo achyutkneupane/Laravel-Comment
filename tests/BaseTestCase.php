@@ -16,12 +16,11 @@ abstract class BaseTestCase extends Orchestra
 
         $this->loadMigrationsFrom(__DIR__ . '/migrations');
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-        $this->artisan('migrate', ['--database' => 'pers_laratest_test'])->run();
+        $this->artisan('migrate', ['--database' => 'comment_test'])->run();
     }
 
     protected function getEnvironmentSetUp($app): void
     {
-        $app['config']->set('database.default', 'pers_laratest_test');
         $app['config']->set('database.connections.pers_laratest_test', [
             'driver'   => 'mysql',
             'host'     => '127.0.0.1',
@@ -31,6 +30,12 @@ abstract class BaseTestCase extends Orchestra
             'database' => 'pers_laratest_test',
             'prefix'   => '',
         ]);
+        $app['config']->set('database.connections.comment_test', [
+            'driver'   => 'sqlite',
+            'database' => ':memory:',
+            'prefix'   => '',
+        ]);
+        $app['config']->set('database.default', 'comment_test');
         $app['config']->set('comment.table_name', 'comments');
         $app['config']->set('comment.commenter_model', User::class);
     }
