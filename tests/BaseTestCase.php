@@ -38,6 +38,7 @@ abstract class BaseTestCase extends Orchestra
         $app['config']->set('database.default', 'comment_test');
         $app['config']->set('comment.table_name', 'comments');
         $app['config']->set('comment.commenter_model', User::class);
+        $app['config']->set('comment.manual_approval', true);
     }
 
     public function getPackageProviders($app): array

@@ -48,7 +48,7 @@ class CommentFactory extends Factory
     public function pending(): static
     {
         return $this->state(fn (array $attributes) => [
-            'approved_at' => null,
+            'pending' => true,
         ]);
     }
 }

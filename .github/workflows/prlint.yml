@@ -11,8 +11,19 @@ permissions:
   pull-requests: read
 
 jobs:
+  test:
+    name: Run PHPUnit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run PHPUnit tests
+        run: |
+          composer install
+          vendor/bin/phpunit
+
   validate:
     name: Validate PR title
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: amannn/action-semantic-pull-request@v5
