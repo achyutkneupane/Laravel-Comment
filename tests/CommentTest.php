@@ -119,8 +119,10 @@ class CommentTest extends BaseTestCase
             'commenter_type' => get_class($user)
         ]);
 
-        $this->assertNull($comment->approved_at);
-        $comment->approve();
+        if(config('comment.manual_approval')) {
+            $this->assertNull($comment->approved_at);
+            $comment->approve();
+        }
         $this->assertNotNull($comment->approved_at);
     }
 
