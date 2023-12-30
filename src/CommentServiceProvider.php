@@ -11,6 +11,11 @@ class CommentServiceProvider extends ServiceProvider
 {
     public function boot() : void
     {
+        /**
+         * Register the Comment model observer
+         */
+        Comment::observe(CommentObserver::class);
+
         $this->publishes([
             /**
              * Publish the config file
