@@ -190,4 +190,40 @@ class CommentTest extends BaseTestCase
             $this->assertEquals($comment->id, $reply->parent->id);
         }
     }
+
+    /** @test */
+    public function test_auto_approve_comment()
+    {
+        config(['comment.manual_approval' => false]);
+
+        $user = $this->createUser();
+        $article = $this->createArticle();
+
+        $comment = $article->comments()->create([
+            'content' => $this->faker->paragraph,
+            'commenter_id' => $user->id,
+            'commenter_type' => get_class($user)
+        ]);
+
+        $this->assertNotNull($comment->approved_at);
+    }
+
+    /** @test */
+    public function test_manual_approve_comment()
+    {
+        config(['comment.manual_approval' => true]);
+
+        $user = $this->createUser();
+        $article = $this->createArticle();
+
+        $comment = $article->comments()->create([
+            'content' => $this->faker->paragraph,
+            'commenter_id' => $user->id,
+            'commenter_type' => get_class($user)
+        ]);
+
+        $this->assertNull($comment->approved_at);
+        $comment->approve();
+        $this->assertNotNull($comment->approved_at);
+    }
 }

@@ -14,20 +14,21 @@ class CommentObserver
         /**
          * If the comment is pending, set approved_at to null by default
          */
-        if($comment->pending) {
+        if($comment->pending || $comment->approved_at !== null) {
             unset($comment->pending);
             return;
         }
 
         $manualApproval = config('comment.manual_approval');
+
         if ($manualApproval === null) {
             $manualApproval = false;
         }
 
         if (!$manualApproval) {
-            $comment->update([
-                'approved_at' => now(),
-            ]);
+            $comment->approved_at = now();
+        } else {
+            $comment->approved_at = null;
         }
     }
 }
